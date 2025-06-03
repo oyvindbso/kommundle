@@ -78,7 +78,7 @@ function App() {
               <span style={{color:"#00b180"}}>M</span>
               <span style={{color:"#147aab"}}>U</span>
               <span style={{color:"#675997"}}>N</span>
-              <span style={{color:"#f9fbfc"}}>D</span>
+              <span style={{ color: "#FFFFFF",textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black" }}>D</span>
               <span style={{color:"#4fa5c2"}}>L</span>
               <span style={{color:"#f587ac"}}>E</span>
               <span style={{ color: "#149954" }}> </span>
