@@ -160,6 +160,7 @@ export function Game({ settingsData }: GameProps) {
       <Guesses
         rowCount={MAX_TRY_COUNT}
         guesses={guesses}
+        settingsData={settingsData}
       />
       <div className="my-2">
         {gameEnded ? (
