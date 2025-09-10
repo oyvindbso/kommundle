@@ -8,6 +8,7 @@ import { CountryInput } from "./CountryInput";
 import * as geolib from "geolib";
 import { Share } from "./Share";
 import { Guesses } from "./Guesses";
+import React from "react";
 
 function getDayString() {
   return DateTime.now().toFormat("dd-MM-yyyy");
