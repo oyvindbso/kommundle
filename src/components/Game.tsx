@@ -90,7 +90,7 @@ export function Game() {
           sanitizeCountryName(
             getCountryName(i18n.resolvedLanguage, country)
           ) === sanitizeCountryName(currentGuess)
-      );      );
+      );
 
       if (guessedCountry == null) {
         toast.error("Ukjent kommune!");
