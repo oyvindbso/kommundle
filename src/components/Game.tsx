@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState, useRef } from "react";
 import { DateTime } from "luxon";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import seedrandom from "seedrandom";
 import { countries, countriesWithImage } from "../domain/countries";
@@ -14,6 +13,7 @@ import { SettingsData } from "../hooks/useSettings";
 function getDayString() {
   return DateTime.now().toFormat("dd-MM-yyyy");
 }
+
 function getDayStringOld() {
   return DateTime.now().toFormat("yyyy-MM-dd");
 }
@@ -34,6 +34,7 @@ interface GameProps {
 }
 
 export function Game({ settingsData }: GameProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const dayString = useMemo(getDayStringOld, []); 
   const dayStringNew = useMemo(getDayString, []);
   const country = useMemo(
@@ -48,7 +49,6 @@ export function Game({ settingsData }: GameProps) {
   const [guesses, addGuess] = useGuesses(dayStringNew);
   const [csvData, setCsvData] = useState<string[][] | null>(null);
   const [isLoadingCsv, setIsLoadingCsv] = useState(true);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const gameEnded = guesses.length === MAX_TRY_COUNT || guesses.at(-1)?.distance === 0;
 
