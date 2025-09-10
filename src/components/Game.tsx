@@ -9,6 +9,7 @@ import { CountryInput } from "./CountryInput";
 import * as geolib from "geolib";
 import { Share } from "./Share";
 import { Guesses } from "./Guesses";
+import { SettingsData } from "../hooks/useSettings";
 
 function getDayString() {
   return DateTime.now().toFormat("dd-MM-yyyy");
@@ -20,7 +21,7 @@ function getDayStringOld() {
 const MAX_TRY_COUNT = 6;
 
 // Helper function to parse CSV data into a 2D array
-function parseCSV(csvText) {
+function parseCSV(csvText: string) {
   const lines = csvText.trim().split('\n');
   return lines.map(line => {
     // Simple CSV parsing - you might want to use a proper CSV library for complex data
@@ -28,7 +29,11 @@ function parseCSV(csvText) {
   });
 }
 
-export function Game() {
+interface GameProps {
+  settingsData: SettingsData;
+}
+
+export function Game({ settingsData }: GameProps) {
   const dayString = useMemo(getDayStringOld, []); 
   const dayStringNew = useMemo(getDayString, []);
   const country = useMemo(
@@ -41,7 +46,7 @@ export function Game() {
 
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, addGuess] = useGuesses(dayStringNew);
-  const [csvData, setCsvData] = useState(null);
+  const [csvData, setCsvData] = useState<string[][] | null>(null);
   const [isLoadingCsv, setIsLoadingCsv] = useState(true);
 
   const gameEnded = guesses.length === MAX_TRY_COUNT || guesses.at(-1)?.distance === 0;
@@ -72,7 +77,7 @@ export function Game() {
   }, [country.code]);
 
   const handleSubmit = useCallback(
-    (e) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const guessedCountry = countries.find(
         (country) => country.name.toLowerCase() === currentGuess.toLowerCase()
@@ -100,7 +105,7 @@ export function Game() {
   );
 
   useEffect(() => {
-    if (guesses.length === MAX_TRY_COUNT && guesses.at(-1)?.distance > 0) {
+    if (guesses.length === MAX_TRY_COUNT && guesses.at(-1)!.distance > 0) {
       toast.info(country.name.toUpperCase(), { autoClose: false });
     }
   }, [country.name, guesses]);
