@@ -48,6 +48,7 @@ export function Game({ settingsData }: GameProps) {
   const [guesses, addGuess] = useGuesses(dayStringNew);
   const [csvData, setCsvData] = useState<string[][] | null>(null);
   const [isLoadingCsv, setIsLoadingCsv] = useState(true);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const gameEnded = guesses.length === MAX_TRY_COUNT || guesses.at(-1)?.distance === 0;
 
