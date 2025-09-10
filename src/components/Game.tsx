@@ -106,7 +106,8 @@ export function Game({ settingsData }: GameProps) {
   );
 
   useEffect(() => {
-    if (guesses.length === MAX_TRY_COUNT && guesses.at(-1)!.distance > 0) {
+    const lastGuess = guesses.at(-1);
+    if (guesses.length === MAX_TRY_COUNT && lastGuess && lastGuess.distance > 0) {
       toast.info(country.name.toUpperCase(), { autoClose: false });
     }
   }, [country.name, guesses]);
