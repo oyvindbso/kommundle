@@ -169,7 +169,7 @@ export function Game({ settingsData }: GameProps) {
             dayString={dayString} 
             settingsData={settingsData}
             hideImageMode={false}
-            rotationMode={0}
+            rotationMode={false}
           />
         ) : (
           <form onSubmit={handleSubmit}>
