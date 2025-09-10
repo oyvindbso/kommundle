@@ -177,6 +177,7 @@ export function Game({ settingsData }: GameProps) {
               <CountryInput
                 currentGuess={currentGuess}
                 setCurrentGuess={setCurrentGuess}
+                inputRef={inputRef}
               />
               <button
                 className="border-2 uppercase my-0.5 hover:bg-gray-50 active:bg-gray-100"
