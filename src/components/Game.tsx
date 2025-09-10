@@ -1,19 +1,14 @@
+import React from "react";
 import { DateTime } from "luxon";
-import { useCallback, useEffect, useMemo, useState, useRef } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import seedrandom from "seedrandom";
-import { countries, countriesWithImage, sanitizeCountryName} from "../domain/countries";
+import { countries, countriesWithImage } from "../domain/countries";
 import { useGuesses } from "../hooks/useGuesses";
 import { CountryInput } from "./CountryInput";
 import * as geolib from "geolib";
 import { Share } from "./Share";
 import { Guesses } from "./Guesses";
-import React from "react";
-
-import { useTranslation } from "react-i18next";
-import { SettingsData } from "../hooks/useSettings";
-import { useMode } from "../hooks/useMode";
-import { useCountry } from "../hooks/useCountry";
 
 function getDayString() {
   return DateTime.now().toFormat("dd-MM-yyyy");
@@ -33,12 +28,6 @@ function parseCSV(csvText) {
   });
 }
 
-  const gameEnded =
-    guesses.length === MAX_TRY_COUNT ||
-    guesses[guesses.length - 1]?.distance === 0;
-interface GameProps {
-  settingsData: SettingsData;
-}
 export function Game() {
   const dayString = useMemo(getDayStringOld, []); 
   const dayStringNew = useMemo(getDayString, []);
@@ -86,10 +75,7 @@ export function Game() {
     (e) => {
       e.preventDefault();
       const guessedCountry = countries.find(
-        (country) =>
-          sanitizeCountryName(
-            getCountryName(i18n.resolvedLanguage, country)
-          ) === sanitizeCountryName(currentGuess)
+        (country) => country.name.toLowerCase() === currentGuess.toLowerCase()
       );
 
       if (guessedCountry == null) {
