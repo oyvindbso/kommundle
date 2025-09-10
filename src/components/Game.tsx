@@ -1,79 +1,84 @@
 import { DateTime } from "luxon";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import {
-  countries,
-  getCountryName,
-  sanitizeCountryName,
-} from "../domain/countries";
+import seedrandom from "seedrandom";
+import { countries, countriesWithImage } from "../domain/countries";
 import { useGuesses } from "../hooks/useGuesses";
 import { CountryInput } from "./CountryInput";
 import * as geolib from "geolib";
 import { Share } from "./Share";
 import { Guesses } from "./Guesses";
-import { useTranslation } from "react-i18next";
-import { SettingsData } from "../hooks/useSettings";
-import { useMode } from "../hooks/useMode";
-import { useCountry } from "../hooks/useCountry";
 
 function getDayString() {
-  return DateTime.now().toFormat("yyyy-MM-dd");
-}
-
-function getDayStringNew() {
   return DateTime.now().toFormat("dd-MM-yyyy");
+}
+function getDayStringOld() {
+  return DateTime.now().toFormat("yyyy-MM-dd");
 }
 
 const MAX_TRY_COUNT = 6;
 
-interface GameProps {
-  settingsData: SettingsData;
+// Helper function to parse CSV data into a 2D array
+function parseCSV(csvText) {
+  const lines = csvText.trim().split('\n');
+  return lines.map(line => {
+    // Simple CSV parsing - you might want to use a proper CSV library for complex data
+    return line.split(',').map(cell => cell.trim());
+  });
 }
 
-export function Game({ settingsData }: GameProps) {
-  const { i18n } = useTranslation();
-  const dayString = useMemo(getDayString, []);
-  const dayStringNew = useMemo(getDayStringNew, []);
-
-  const countryInputRef = useRef<HTMLInputElement>(null);
-
-  const [country, randomAngle, imageScale] = useCountry(dayStringNew);
+export function Game() {
+  const dayString = useMemo(getDayStringOld, []); 
+  const dayStringNew = useMemo(getDayString, []);
+  const country = useMemo(
+    () =>
+      countriesWithImage[
+        Math.floor(seedrandom.alea(dayStringNew)() * countriesWithImage.length)
+      ],
+    [dayStringNew]
+  );
 
   const [currentGuess, setCurrentGuess] = useState("");
   const [guesses, addGuess] = useGuesses(dayStringNew);
-  const [hideImageMode, setHideImageMode] = useMode(
-    "hideImageMode",
-    dayStringNew,
-    settingsData.noImageMode
-  );
-  const [rotationMode, setRotationMode] = useMode(
-    "rotationMode",
-    dayString,
-    settingsData.rotationMode
-  );
+  const [csvData, setCsvData] = useState(null);
+  const [isLoadingCsv, setIsLoadingCsv] = useState(true);
 
-  const gameEnded =
-    guesses.length === MAX_TRY_COUNT ||
-    guesses[guesses.length - 1]?.distance === 0;
+  const gameEnded = guesses.length === MAX_TRY_COUNT || guesses.at(-1)?.distance === 0;
+
+  // Load CSV data for the selected country
+  useEffect(() => {
+    const loadCsvData = async () => {
+      try {
+        setIsLoadingCsv(true);
+        // Assuming CSV files are stored similar to SVG files
+        const response = await fetch(`data/countries/${country.code.toLowerCase()}/data.csv`);
+        if (!response.ok) {
+          throw new Error('Failed to load CSV data');
+        }
+        const csvText = await response.text();
+        const parsedData = parseCSV(csvText);
+        setCsvData(parsedData);
+      } catch (error) {
+        console.error('Error loading CSV data:', error);
+        toast.error('Kunne ikke laste data!');
+        setCsvData([]); // Set empty array as fallback
+      } finally {
+        setIsLoadingCsv(false);
+      }
+    };
+
+    loadCsvData();
+  }, [country.code]);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    (e) => {
       e.preventDefault();
       const guessedCountry = countries.find(
-        (country) =>
-          sanitizeCountryName(
-            getCountryName(i18n.resolvedLanguage, country)
-          ) === sanitizeCountryName(currentGuess)
+        (country) => country.name.toLowerCase() === currentGuess.toLowerCase()
       );
 
       if (guessedCountry == null) {
-        toast.error("Ukjent kommune");
+        toast.error("Ukjent kommune!");
         return;
       }
 
@@ -87,101 +92,84 @@ export function Game({ settingsData }: GameProps) {
       setCurrentGuess("");
 
       if (newGuess.distance === 0) {
-        toast.success("Godt gjort!", { delay: 2000 });
+        toast.success("Godt gjort!");
       }
     },
-    [addGuess, country, currentGuess, i18n.resolvedLanguage]
+    [addGuess, country, currentGuess]
   );
 
   useEffect(() => {
-    if (
-      guesses.length === MAX_TRY_COUNT &&
-      guesses[guesses.length - 1].distance > 0
-    ) {
-      toast.info(getCountryName(i18n.resolvedLanguage, country).toUpperCase(), {
-        autoClose: false,
-        delay: 2000,
-      });
+    if (guesses.length === MAX_TRY_COUNT && guesses.at(-1)?.distance > 0) {
+      toast.info(country.name.toUpperCase(), { autoClose: false });
     }
-  }, [country, guesses, i18n.resolvedLanguage]);
+  }, [country.name, guesses]);
+
+  // Render the data table
+  const renderDataTable = () => {
+    if (isLoadingCsv) {
+      return (
+        <div className="flex justify-center items-center h-52">
+          <div className="text-lg">Laster data...</div>
+        </div>
+      );
+    }
+
+    if (!csvData || csvData.length === 0) {
+      return (
+        <div className="flex justify-center items-center h-52">
+          <div className="text-lg text-red-500">Kunne ikke laste data</div>
+        </div>
+      );
+    }
+
+    // Ensure we have exactly 6 rows (pad with empty strings if needed)
+    const tableRows = csvData.slice(0, 6);
+    while (tableRows.length < 6) {
+      tableRows.push(['', '']);
+    }
+
+    return (
+      <div className="max-h-52 my-1 overflow-hidden">
+        <table className="w-full border-collapse border border-gray-300 bg-white shadow-sm">
+          <tbody>
+            {tableRows.map((row, rowIndex) => (
+              <tr key={rowIndex} className="border-b border-gray-200">
+                <td className="border-r border-gray-200 p-2 text-sm font-medium bg-gray-50">
+                  {row[0] || ''}
+                </td>
+                <td className="p-2 text-sm">
+                  {row[1] || ''}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
 
   return (
-    <div className="flex-grow flex flex-col mx-2">
-      {hideImageMode && !gameEnded && (
-        <button
-          className="border-2 uppercase my-2 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-slate-800 dark:active:bg-slate-700"
-          type="button"
-          onClick={() => setHideImageMode(false)}
-        >
-          {"Vis på kart"}
-        </button>
-      )}
-      <div className="my-1">
-        <img
-          className={`max-h-52 m-auto transition-transform duration-700 ease-in ${
-            hideImageMode && !gameEnded ? "h-0" : "h-full"
-          }`}
-          alt="country to guess"
-          src={`images/countries/${country.code.toLowerCase()}/vector.svg`}
-          style={
-            rotationMode && !gameEnded
-              ? {
-                  transform: `rotate(${randomAngle}deg) scale(${imageScale})`,
-                }
-              : {}
-          }
-        />
-      </div>
-      {rotationMode && !hideImageMode && !gameEnded && (
-        <button
-          className="border-2 uppercase mb-2 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-slate-800 dark:active:bg-slate-700"
-          type="button"
-          onClick={() => setRotationMode(false)}
-        >
-          {"Ikke rotér"}
-        </button>
-      )}
+    <div className="flex flex-col mx-2">
+      {renderDataTable()}
       <Guesses
         rowCount={MAX_TRY_COUNT}
         guesses={guesses}
-        settingsData={settingsData}
-        countryInputRef={countryInputRef}
       />
       <div className="my-2">
         {gameEnded ? (
-          <>
-            <Share
-              guesses={guesses}
-              dayString={dayString}
-              settingsData={settingsData}
-              hideImageMode={hideImageMode}
-              rotationMode={rotationMode}
-            />
-            <a
-              className="underline w-full text-center block mt-4"
-              href={`https://www.google.com/maps?q=${getCountryName(
-                i18n.resolvedLanguage,
-                country
-              )}%20kommune&hl=${i18n.resolvedLanguage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {"Vis på Google Maps"}
-            </a>
-          </>
+          <Share guesses={guesses} dayString={dayString} />
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col">
               <CountryInput
-                inputRef={countryInputRef}
                 currentGuess={currentGuess}
                 setCurrentGuess={setCurrentGuess}
               />
               <button
-                className="border-2 uppercase my-0.5 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-slate-800 dark:active:bg-slate-700"
+                className="border-2 uppercase my-0.5 hover:bg-gray-50 active:bg-gray-100"
                 type="submit"
               >
-                🌍 {"Gjett"}
+                🌍 Gjett
               </button>
             </div>
           </form>
