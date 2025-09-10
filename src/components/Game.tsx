@@ -24,8 +24,8 @@ const MAX_TRY_COUNT = 6;
 function parseCSV(csvText: string) {
   const lines = csvText.trim().split('\n');
   return lines.map(line => {
-    // Simple CSV parsing - you might want to use a proper CSV library for complex data
-    return line.split(',').map(cell => cell.trim());
+    // Using semicolon as separator to support commas in numbers (European format)
+    return line.split(';').map(cell => cell.trim());
   });
 }
 
