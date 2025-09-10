@@ -164,7 +164,13 @@ export function Game({ settingsData }: GameProps) {
       />
       <div className="my-2">
         {gameEnded ? (
-          <Share guesses={guesses} dayString={dayString} />
+          <Share 
+            guesses={guesses} 
+            dayString={dayString} 
+            settingsData={settingsData}
+            hideImageMode={false}
+            rotationMode={0}
+          />
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col">
