@@ -3,6 +3,8 @@
 // Countries images => https://github.com/djaiss/mapsicon
 
 export const countryCodesWithImage = [
+       'municip5041',
+       'municip1580',
        'municip5020',
        'municip5022',
        'municip5021',
@@ -358,8 +360,6 @@ export const countryCodesWithImage = [
        'municip1103',
        'municip1106',
        'municip5042',
-       'municip5041',
-       'municip1580',
 ];
 
 export interface Country {
