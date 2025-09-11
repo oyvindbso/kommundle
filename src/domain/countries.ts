@@ -371,13 +371,6 @@ export interface Country {
 
 export const countries = [
 {
-code: "municip5020",
-longitude: 10.6609468284909,
-latitude: 64.2694574828099,
-name: "Osen"
-},  
-
-{
 code: "municip5022",
 longitude: 9.87619464455965,
 latitude: 62.8095286432537,
@@ -2868,6 +2861,13 @@ longitude: 6.52254212910888,
 latitude: 62.5741071043019,
 name: "Haram"
 },  
+{
+code: "municip5020",
+longitude: 10.6609468284909,
+latitude: 64.2694574828099,
+name: "Osen"
+},  
+
 ];
 
 export const countriesWithImage = countries.filter((c) =>
@@ -2876,8 +2876,6 @@ export const countriesWithImage = countries.filter((c) =>
 
 // Source: https://fr.wikipedia.org/wiki/ISO_3166
 const frenchCountryNames: Record<string, string> = {
-  municip0301: "A",
-  municip5020: "A",
   municip5022: "A",
   municip5021: "A",
   municip5028: "A",
@@ -3232,6 +3230,8 @@ const frenchCountryNames: Record<string, string> = {
   municip1106: "A",
   municip5042: "A",
   municip5041: "A",
+  municip0301: "A",
+  municip5020: "A",
 };
 
 export function getCountryName(language: string, country: Country) {
