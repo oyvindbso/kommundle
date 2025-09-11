@@ -78,7 +78,6 @@ function App() {
               <span style={{color:"#00853D"}}>G</span>
               <span style={{color:"#87ADD7"}}>L</span>
               <span style={{color:"#00F80"}}>E</span>
-              <span>🇵🇸</span>
             </h1>
             <button
               className="ml-3 text-xl"
