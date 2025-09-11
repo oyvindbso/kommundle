@@ -101,14 +101,14 @@ function App() {
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
-            ❤️ <Worldle />? -
+            Kjedelig at valget er over? 
             <a
               className="underline pl-1"
-              href="https://playgroundsforpalestine.org/"
+              href="https://valg.kommundle.no/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"Gi lekeplasser til Palestina 🇵🇸"}
+              {"Spill Valgle!"}
             </a>
           </footer>
         </div>
