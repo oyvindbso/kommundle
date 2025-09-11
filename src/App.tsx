@@ -101,7 +101,7 @@ function App() {
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
-            Kjedelig at valget er over? 
+            ❤️ <Worldle /> og kjedelig at valget er over? 
             <a
               className="underline pl-1"
               href="https://valg.kommundle.no/"
