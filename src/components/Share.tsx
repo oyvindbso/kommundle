@@ -10,7 +10,7 @@ import { Guess } from "../domain/guess";
 import React from "react";
 import { SettingsData } from "../hooks/useSettings";
 
-const START_DATE = DateTime.fromISO("2023-02-24");
+const START_DATE = DateTime.fromISO("2025-09-12");
 
 interface ShareProps {
   guesses: Guess[];
@@ -42,7 +42,7 @@ export function Share({
       : rotationMode
       ? " "
       : "";
-    const title = `#Kommundle #${dayCount} ${guessCount}/6${difficultyModifierEmoji}`;
+    const title = `#Valgle #${dayCount} ${guessCount}/6${difficultyModifierEmoji}`;
 
     const guessString = guesses
       .map((guess) => {
@@ -51,7 +51,7 @@ export function Share({
       })
       .join("\n");
 
-    return [title, guessString, "https://kommundle.no"].join("\n");
+    return [title, guessString, "https://valg.kommundle.no"].join("\n");
   }, [dayString, guesses, hideImageMode, rotationMode, theme]);
 
   return (
