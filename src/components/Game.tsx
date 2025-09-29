@@ -142,10 +142,10 @@ export function Game({ settingsData }: GameProps) {
           <tbody>
             {tableRows.map((row, rowIndex) => (
               <tr key={rowIndex} className="border-b border-gray-200">
-                <td className="border-r border-gray-200 p-2 text-sm font-medium bg-gray-50">
+                <td className="border-r border-gray-200 p-2 text-sm font-medium bg-gray-50 text-gray-900">
                   {row[0] || ''}
                 </td>
-                <td className="p-2 text-sm">
+                <td className="p-2 text-sm text-gray-900">
                   {row[1] || ''}
                 </td>
               </tr>
