@@ -117,6 +117,7 @@ export function Game({ settingsData }: GameProps) {
         </button>
       )}
       <div className="my-1">
+        <h1>Grunde Almeland</h1>
         <img
           className={`max-h-52 m-auto transition-transform duration-700 ease-in ${
             hideImageMode && !gameEnded ? "h-0" : "h-full"
