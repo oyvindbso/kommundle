@@ -122,7 +122,7 @@ export function Game({ settingsData }: GameProps) {
             hideImageMode && !gameEnded ? "h-0" : "h-full"
           }`}
           alt="country to guess"
-          src={`images/countries/${country.code.toLowerCase()}/vector.svg`}
+          src={`https://stortinget.no/Personimages/PersonImages_Full/GKAL_full.jpg`}
           style={
             rotationMode && !gameEnded
               ? {
