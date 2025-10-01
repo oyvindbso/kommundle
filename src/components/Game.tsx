@@ -117,7 +117,7 @@ export function Game({ settingsData }: GameProps) {
         </button>
       )}
       <div className="my-1">
-        <h1><b>Grunde Almeland - Venstre</b></h1>
+        <h1 style="text-align:center;"><b>Grunde Almeland - Venstre</b></h1>
         <img
           className={`max-h-52 m-auto transition-transform duration-700 ease-in ${
             hideImageMode && !gameEnded ? "h-0" : "h-full"
