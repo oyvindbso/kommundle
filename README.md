@@ -1,6 +1,6 @@
-# Kommund**l**e
+# Slagord**l**e
 
-[Kommund**l**e](https://www.kommundle.no) er et spill der man får et kommunevåpen og må gjette kommunen som har det kommunevåpenet. Man får vite hvor langt unna man er når man gjetter en kommune og man har seks forsøk. 
+[Kommund**l**e](https://www.kommundle.no) er et spill der man får et kommuneslagord og må gjette kommunen som har det slagordet. Man får vite hvor langt unna man er når man gjetter en kommune og man har seks forsøk. 
 
 ## Slagord**l**e
 
