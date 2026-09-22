@@ -101,14 +101,23 @@ function App() {
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
-            ❤️ <Worldle /> og kjedelig at valget er over? 
+            Så du kan kommunevåpen? Hva med kommuneslagord?!?   
+            <a
+              className="underline pl-1"
+              href="https://slagordle.kommundle.no/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {"Spill Slagordle!"}
+              
+            Snart er det valg også. 
             <a
               className="underline pl-1"
               href="https://valg.kommundle.no/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"Spill Valgle!"}
+              {"Hva med litt Valgle!"}
             </a>
           </footer>
         </div>
