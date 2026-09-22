@@ -57,36 +57,6 @@ export function Settings({
           </label>
         </div>
       </div>
-      <div className="my-4">
-        <header className="my-2">
-          <h3 className="text-lg font-bold">{"Forvanskere"}</h3>
-          <div className="text-sm italic text-gray-500">
-            {"Begynner neste dag"}
-          </div>
-        </header>
-        <div className="flex p-1">
-          <input
-            type="checkbox"
-            id="setting-noImage"
-            checked={settingsData.noImageMode}
-            onChange={(e) => updateSettings({ noImageMode: e.target.checked })}
-          />
-          <label className="flex-1 ml-2" htmlFor="setting-noImage">
-            {"Uten bilder"}
-          </label>
-        </div>
-        <div className="flex p-1">
-          <input
-            type="checkbox"
-            id="setting-rotationMode"
-            checked={settingsData.rotationMode}
-            onChange={(e) => updateSettings({ rotationMode: e.target.checked })}
-          />
-          <label className="flex-1 ml-2" htmlFor="setting-rotationMode">
-            {"Roter bildene"}
-          </label>
-        </div>
-      </div>
     </Panel>
   );
 }
