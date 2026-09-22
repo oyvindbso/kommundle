@@ -59,7 +59,7 @@ export function Share({
     return [
       title,
       guessString,
-      isSlogan ? "https://kommundle.no/slagord" : "https://kommundle.no",
+      isSlogan ? "https://slagordle.kommundle.no/" : "https://kommundle.no",
     ].join("\n");
   }, [dayString, gameName, guesses, hideImageMode, isSlogan, rotationMode, theme]);
 
