@@ -101,7 +101,7 @@ function App() {
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
-            Så du har fiksa dagens </Wordle>? Hva med kommuneslagord?!?   
+            Så du har fiksa dagens <Worldle />? Hvor god er du på kommuneslagord?!?   
             <a
               className="underline pl-1"
               href="https://slagordle.kommundle.no/"
