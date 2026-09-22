@@ -74,11 +74,11 @@ function App() {
               </button>
               <a
                 className="text-xl leading-none no-underline whitespace-nowrap"
-                href="https://valg.kommundle.no/"
+                href="https://kommundle.no/"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Spill Valgle"
-                aria-label="Spill Valgle"
+                title="Spill Kommundle"
+                aria-label="Spill Kommundle"
               >
                 ←<span className="hidden sm:inline">🗳️</span>
               </a>
@@ -91,20 +91,34 @@ function App() {
               <span style={{color:"#87ADD7"}}>L</span>
               <span style={{color:"#00F80"}}>E</span>
             </h1>
-            <button
-              className="ml-3 text-xl"
-              type="button"
-              onClick={() => setStatsOpen(true)}
-            >
-              📈
-            </button>
-            <button
-              className="ml-3 text-xl"
-              type="button"
-              onClick={() => setSettingsOpen(true)}
-            >
-              ⚙️
-            </button>
+          <div className="flex flex-col items-end leading-none">
+              <div className="flex gap-2 sm:gap-3">
+                <button
+                  className="text-xl leading-none"
+                  type="button"
+                  onClick={() => setStatsOpen(true)}
+                >
+                  📈
+                </button>
+                <button
+                  className="text-xl leading-none"
+                  type="button"
+                  onClick={() => setSettingsOpen(true)}
+                >
+                  ⚙️
+                </button>
+              </div>
+              <a
+                className="text-xl leading-none no-underline whitespace-nowrap"
+                href="https://slagordle.kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Spill Slagordle"
+                aria-label="Spill Slagordle"
+              >
+                <span className="hidden sm:inline">💬</span>→
+              </a>
+            </div>
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
