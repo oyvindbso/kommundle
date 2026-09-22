@@ -120,26 +120,30 @@ function App() {
             </a>
           </header>
           <Game settingsData={settingsData} />
-          <footer className="flex justify-center text-sm mt-8 mb-1">
-            Så du har fiksa dagens <Worldle />? Hvor god er du på kommuneslagord?!?   
-            <a
-              className="underline pl-1"
-              href="https://slagordle.kommundle.no/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {" Spill Slagordle!"}
-            </a>
-              
-            Snart er det valg også. 
-            <a
-              className="underline pl-1"
-              href="https://valg.kommundle.no/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {" Hva med litt Valgle!"}
-            </a>
+          <footer className="text-center text-xs leading-relaxed px-3 mt-8 mb-3 space-y-1">
+            <p>
+              Så du har fiksa dagens <Worldle />? Hvor god er du på
+              kommuneslagord?!?{" "}
+              <a
+                className="underline"
+                href="https://slagordle.kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Spill Slagordle!
+              </a>
+            </p>
+            <p>
+              Snart er det valg også.{" "}
+              <a
+                className="underline"
+                href="https://valg.kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hva med litt Valgle!
+              </a>
+            </p>
           </footer>
         </div>
       </div>
