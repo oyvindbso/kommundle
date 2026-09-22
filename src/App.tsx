@@ -80,7 +80,7 @@ function App() {
                 title="Spill Kommundle"
                 aria-label="Spill Kommundle"
               >
-                ←<span className="hidden sm:inline">🗳️</span>
+                ←<span className="hidden sm:inline">🌍</span>
               </a>
             </div>
             <h1 className="text-[clamp(1.125rem,5.8vw,2rem)] font-bold uppercase tracking-wide text-center my-1 flex-auto whitespace-nowrap">
