@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { loadAllGuesses } from "./guess";
+import { GUESSES_STORAGE_KEY, loadAllGuesses } from "./guess";
 
 export interface StatsData {
   currentStreak: number;
@@ -10,8 +10,10 @@ export interface StatsData {
   averageBestDistance: number;
 }
 
-export function getStatsData(): StatsData {
-  const allGuesses = loadAllGuesses();
+export function getStatsData(
+  storageKey: string = GUESSES_STORAGE_KEY
+): StatsData {
+  const allGuesses = loadAllGuesses(storageKey);
 
   const allGuessesEntries = Object.entries(allGuesses);
   const played = allGuessesEntries.length;

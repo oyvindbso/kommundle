@@ -1,11 +1,17 @@
 import { useCallback, useState } from "react";
-import { Guess, loadAllGuesses, saveGuesses } from "../domain/guess";
+import {
+  Guess,
+  GUESSES_STORAGE_KEY,
+  loadAllGuesses,
+  saveGuesses,
+} from "../domain/guess";
 
 export function useGuesses(
-  dayString: string
+  dayString: string,
+  storageKey: string = GUESSES_STORAGE_KEY
 ): [Guess[], (guess: Guess) => void] {
   const [guesses, setGuesses] = useState<Guess[]>(
-    loadAllGuesses()[dayString] ?? []
+    loadAllGuesses(storageKey)[dayString] ?? []
   );
 
   const addGuess = useCallback(
@@ -13,9 +19,9 @@ export function useGuesses(
       const newGuesses = [...guesses, newGuess];
 
       setGuesses(newGuesses);
-      saveGuesses(dayString, newGuesses);
+      saveGuesses(dayString, newGuesses, storageKey);
     },
-    [dayString, guesses]
+    [dayString, guesses, storageKey]
   );
 
   return [guesses, addGuess];

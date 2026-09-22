@@ -11,6 +11,7 @@ import React from "react";
 import { SettingsData } from "../hooks/useSettings";
 
 const START_DATE = DateTime.fromISO("2023-02-24");
+const SLOGAN_START_DATE = DateTime.fromISO("2026-09-22");
 
 interface ShareProps {
   guesses: Guess[];
@@ -18,6 +19,7 @@ interface ShareProps {
   settingsData: SettingsData;
   hideImageMode: boolean;
   rotationMode: boolean;
+  gameName?: "Kommundle" | "Slagordle";
 }
 
 export function Share({
@@ -26,23 +28,26 @@ export function Share({
   settingsData,
   hideImageMode,
   rotationMode,
+  gameName = "Kommundle",
 }: ShareProps) {
   const { theme } = settingsData;
+  const isSlogan = gameName === "Slagordle";
 
   const shareText = useMemo(() => {
     const guessCount =
       guesses[guesses.length - 1]?.distance === 0 ? guesses.length : "X";
     const dayCount = Math.floor(
-      Interval.fromDateTimes(START_DATE, DateTime.fromISO(dayString)).length(
-        "day"
-      )
+      Interval.fromDateTimes(
+        isSlogan ? SLOGAN_START_DATE : START_DATE,
+        DateTime.fromISO(dayString)
+      ).length("day")
     );
     const difficultyModifierEmoji = hideImageMode
       ? " "
       : rotationMode
       ? " "
       : "";
-    const title = `#Kommundle #${dayCount} ${guessCount}/6${difficultyModifierEmoji}`;
+    const title = `#${gameName} #${dayCount} ${guessCount}/6${difficultyModifierEmoji}`;
 
     const guessString = guesses
       .map((guess) => {
@@ -51,8 +56,12 @@ export function Share({
       })
       .join("\n");
 
-    return [title, guessString, "https://kommundle.no"].join("\n");
-  }, [dayString, guesses, hideImageMode, rotationMode, theme]);
+    return [
+      title,
+      guessString,
+      isSlogan ? "https://kommundle.no/slagord" : "https://kommundle.no",
+    ].join("\n");
+  }, [dayString, gameName, guesses, hideImageMode, isSlogan, rotationMode, theme]);
 
   return (
     <CopyToClipboard

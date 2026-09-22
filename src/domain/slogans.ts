@@ -1,4 +1,6 @@
-// Municipality name must match exactly the `name` field in muni.ts
+// Municipality name must match exactly the `name` field in countries.ts
+import { countries, Country } from "./countries";
+
 export interface SloganEntry {
   municipality: string;
   slogan: string;
@@ -47,7 +49,7 @@ export const SLOGANS: SloganEntry[] = [
   { municipality: "Evenes", slogan: "Midt i opplevelsen" },
   { municipality: "Evje og Hornnes", slogan: "Hjertet i Agder" },
   { municipality: "Farsund", slogan: "Kysten er klar" },
-  { municipality: "Fauske-Fuossko", slogan: "Folkehelsekommunen der alle trives" },
+  { municipality: "Fauske-Fuosko", slogan: "Folkehelsekommunen der alle trives" },
   { municipality: "Fjaler", slogan: "Eit ope samfunn" },
   { municipality: "Flatanger", slogan: "Aktivt og åpent" },
   { municipality: "Flekkefjord", slogan: "Vilje til vekst" },
@@ -80,12 +82,12 @@ export const SLOGANS: SloganEntry[] = [
   { municipality: "Hamar", slogan: "Alle tiders by" },
   { municipality: "Hamarøy", slogan: "Æventyrlandet" },
   { municipality: "Hammerfest", slogan: "Vit at æ elske dæ" },
-  { municipality: "Harstad - Hárstták", slogan: "Attraktiv hele livet" },
+  { municipality: "Harstad", slogan: "Attraktiv hele livet" },
   { municipality: "Hasvik", slogan: "Storfiskens rike" },
   { municipality: "Heim", slogan: "Inkluderende med store muligheter" },
   { municipality: "Hemnes", slogan: "Skaperglede mellom smul sjø og evig snø" },
   { municipality: "Hemsedal", slogan: "Natur, kultur og livskvalitet" },
-  { municipality: "Herøy (M. og R.)", slogan: "Ei båtlengd føre" },
+  { municipality: "Herøy (Møre og Romsdal)", slogan: "Ei båtlengd føre" },
   { municipality: "Hitra", slogan: "Hitra – når du vil!" },
   { municipality: "Hjartdal", slogan: "Bygder med fortid og framtid" },
   { municipality: "Hjelmeland", slogan: "Hjelmeland naturlegvis" },
@@ -159,7 +161,7 @@ export const SLOGANS: SloganEntry[] = [
   { municipality: "Oppdal", slogan: "Det gode liv i ei attraktiv fjellbygd" },
   { municipality: "Orkland", slogan: "Modig – klok – nær" },
   { municipality: "Osen", slogan: "Et Norge i miniatyr" },
-  { municipality: "Oslo", slogan: "Unanimiter et constanter" },
+  { municipality: "Oslo-Oslove", slogan: "Unanimiter et constanter" },
   { municipality: "Overhalla", slogan: "Positiv, frisk og framsynt" },
   { municipality: "Porsgrunn", slogan: "Sammen om Porsgrunn" },
   { municipality: "Rakkestad", slogan: "Den trivelige kommune" },
@@ -234,7 +236,7 @@ export const SLOGANS: SloganEntry[] = [
   { municipality: "Vestre Toten", slogan: "Trygghet, trivsel og utvikling" },
   { municipality: "Vindafjord", slogan: "Vital og sentral" },
   { municipality: "Vågå", slogan: "Våken og Vågal i Vågå" },
-  { municipality: "Våler (Hedm.)", slogan: "Et gir ekstra" },
+  { municipality: "Våler (Innlandet)", slogan: "Et gir ekstra" },
   { municipality: "Ørsta", slogan: "Hjartet av Sunnmørsalpane" },
   { municipality: "Øvre Eiker", slogan: "Sammen skaper vi et livskraftig Øvre Eiker" },
   { municipality: "Øystre Slidre", slogan: "Rein naturglede!" },
@@ -247,3 +249,16 @@ export const SLOGANS: SloganEntry[] = [
   { municipality: "Åseral", slogan: "Ei positiv kraft" },
   { municipality: "Åsnes", slogan: "Inkluderende og miljøbevist" },
 ];
+
+const sloganByMunicipality = new Map(
+  SLOGANS.map((entry) => [entry.municipality, entry.slogan])
+);
+
+// Only municipalities with a known slogan can be picked by Slagordle.
+export const countriesWithSlogan = countries.filter((c) =>
+  sloganByMunicipality.has(c.name)
+);
+
+export function getSlogan(country: Country): string {
+  return sloganByMunicipality.get(country.name) ?? "";
+}

@@ -1,5 +1,6 @@
 import React from "react";
 // import { formatDistance } from "../../domain/geography";
+import { GUESSES_STORAGE_KEY } from "../../domain/guess";
 import { getStatsData } from "../../domain/stats";
 import { Panel } from "./Panel";
 
@@ -7,9 +8,15 @@ interface StatsProps {
   isOpen: boolean;
   close: () => void;
   distanceUnit: "km" | "miles";
+  storageKey?: string;
 }
 
-export function Stats({ isOpen, close, distanceUnit }: StatsProps) {
+export function Stats({
+  isOpen,
+  close,
+  distanceUnit,
+  storageKey = GUESSES_STORAGE_KEY,
+}: StatsProps) {
   const {
     played,
     winRatio,
@@ -17,7 +24,7 @@ export function Stats({ isOpen, close, distanceUnit }: StatsProps) {
     maxStreak,
     // averageBestDistance,
     guessDistribution,
-  } = getStatsData();
+  } = getStatsData(storageKey);
 
   const maxDistribution = Math.max(...Object.values(guessDistribution));
   return (
