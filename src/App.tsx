@@ -64,13 +64,6 @@ function App() {
       <div className="flex justify-center flex-auto dark:bg-slate-900 dark:text-slate-50">
         <div className="w-full max-w-lg flex flex-col">
           <header className="border-b-2 px-3 border-gray-200 flex">
-            <button
-              className="mr-3 text-xl"
-              type="button"
-              onClick={() => setInfoOpen(true)}
-            >
-              ❓
-            </button>
             <a
               className="mr-3 text-xl flex items-center no-underline whitespace-nowrap"
               href="https://valg.kommundle.no/"
@@ -79,8 +72,15 @@ function App() {
               title="Spill Valgle"
               aria-label="Spill Valgle"
             >
-              ←🗳️
+              ←<span className="hidden sm:inline">🗳️</span>
             </a>
+            <button
+              className="mr-3 text-xl"
+              type="button"
+              onClick={() => setInfoOpen(true)}
+            >
+              ❓
+            </button>
             <h1 className="text-4xl font-bold uppercase tracking-wide text-center my-1 flex-auto">
               <span style={{color:"#d04b36"}}>K</span>
               <span style={{color:"#e36511"}}>O</span>
@@ -94,16 +94,6 @@ function App() {
               <span style={{ color: "#149954" }}> </span>
               <span>🇵🇸</span>
             </h1>
-            <a
-              className="ml-3 text-xl flex items-center no-underline whitespace-nowrap"
-              href="https://slagordle.kommundle.no/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Spill Slagordle"
-              aria-label="Spill Slagordle"
-            >
-              💬→
-            </a>
             <button
               className="ml-3 text-xl"
               type="button"
@@ -118,6 +108,16 @@ function App() {
             >
               ⚙️
             </button>
+            <a
+              className="ml-3 text-xl flex items-center no-underline whitespace-nowrap"
+              href="https://slagordle.kommundle.no/"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Spill Slagordle"
+              aria-label="Spill Slagordle"
+            >
+              <span className="hidden sm:inline">💬</span>→
+            </a>
           </header>
           <Game settingsData={settingsData} />
           <footer className="flex justify-center text-sm mt-8 mb-1">
