@@ -108,7 +108,8 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"Spill Slagordle!"}
+              {" Spill Slagordle!"}
+            </a>
               
             Snart er det valg også. 
             <a
@@ -117,7 +118,7 @@ function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {"Hva med litt Valgle!"}
+              {" Hva med litt Valgle!"}
             </a>
           </footer>
         </div>
