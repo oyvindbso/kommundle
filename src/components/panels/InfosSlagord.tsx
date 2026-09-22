@@ -18,8 +18,7 @@ export function InfosSlagord({ isOpen, close, settingsData }: InfosProps) {
     <Panel title="Spillemåte" isOpen={isOpen} close={close}>
       <div className="space-y-3 text-justify border-b-2 border-gray-200 pb-3 mb-3">
         <div>
-          I <Slagordle /> er det kommunens slagord som står i sentrum, ikke
-          kommunevåpenet. Gjett hvilken kommune som bruker dagens slagord på
+          I <Slagordle /> er det kommunens slagord som står i sentrum. Gjett hvilken kommune som bruker dagens slagord på
           seks forsøk. Hver gjetning må være en norsk kommune.
         </div>
         <div>
@@ -145,8 +144,8 @@ export function InfosSlagord({ isOpen, close, settingsData }: InfosProps) {
           </a>
         </div>
         <div className="font-bold">TAKK</div>
-        Slagordene er samlet inn fra kommunenes egne nettsider og andre åpne
-        kilder. Norske kommuners geografiske plassering er beregnet ved hjelp av
+        Slagordene er samlet inn fra Wikipedias oversikt og inneholder sannsynligvis feil / gamle slagord. Vi setter stor pris på beskjed om det er noe som er feil. 
+        Norske kommuners geografiske plassering er beregnet ved hjelp av
         kartene som er tilgjengelige i r-pakka{" "}
         <a
           className="underline"
