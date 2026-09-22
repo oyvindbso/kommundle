@@ -63,15 +63,27 @@ function App() {
       />
       <div className="flex justify-center flex-auto dark:bg-slate-900 dark:text-slate-50">
         <div className="w-full max-w-lg flex flex-col">
-          <header className="border-b-2 px-3 border-gray-200 flex">
-            <button
-              className="mr-3 text-xl"
-              type="button"
-              onClick={() => setInfoOpen(true)}
-            >
-              ❓
-            </button>
-            <h1 className="text-4xl font-bold uppercase tracking-wide text-center my-1 flex-auto">
+                 <header className="border-b-2 px-3 border-gray-200 flex items-center gap-2 sm:gap-3">
+            <div className="flex flex-col items-start leading-none">
+              <button
+                className="text-xl leading-none"
+                type="button"
+                onClick={() => setInfoOpen(true)}
+              >
+                ❓
+              </button>
+              <a
+                className="text-xl leading-none no-underline whitespace-nowrap"
+                href="https://valg.kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Spill Valgle"
+                aria-label="Spill Valgle"
+              >
+                ←<span className="hidden sm:inline">🗳️</span>
+              </a>
+            </div>
+            <h1 className="text-[clamp(1.125rem,5.8vw,2rem)] font-bold uppercase tracking-wide text-center my-1 flex-auto whitespace-nowrap">
               <span style={{color:"#EB4040"}}>V</span>
               <span style={{color:"#E11926"}}>A</span>
               <span style={{color:"#347103"}}>L</span>
