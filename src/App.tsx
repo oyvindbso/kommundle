@@ -89,7 +89,7 @@ function App() {
               <span style={{color:"#347103"}}>L</span>
               <span style={{color:"#00853D"}}>G</span>
               <span style={{color:"#87ADD7"}}>L</span>
-              <span style={{color:"#00F80"}}>E</span>
+              <span style={{color:"#004F80"}}>E</span>
             </h1>
           <div className="flex flex-col items-end leading-none">
               <div className="flex gap-2 sm:gap-3">

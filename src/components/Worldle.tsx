@@ -8,7 +8,7 @@ export function Worldle() {
               <span style={{color:"#347103"}}>L</span>
               <span style={{color:"#00853D"}}>G</span>
               <span style={{color:"#87ADD7"}}>L</span>
-              <span style={{color:"#00F80"}}>E</span>
+              <span style={{color:"#004F80"}}>E</span>
     </span>
   );
 }
