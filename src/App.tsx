@@ -24,7 +24,7 @@ const TITLE_COLORS = [
 
 function Title() {
   return (
-    <h1 className="text-4xl font-bold uppercase tracking-wide text-center my-1 flex-auto">
+    <h1 className="text-[clamp(1.125rem,5.8vw,2rem)] font-bold uppercase tracking-wide text-center my-1 flex-auto whitespace-nowrap">
       {Array.from("SLAGORDLE").map((letter, index) => {
         const color = TITLE_COLORS[index % TITLE_COLORS.length];
         return (
@@ -96,33 +96,59 @@ function App() {
       />
       <div className="flex justify-center flex-auto dark:bg-slate-900 dark:text-slate-50">
         <div className="w-full max-w-lg flex flex-col">
-          <header className="border-b-2 px-3 border-gray-200 flex">
-            <button
-              className="mr-3 text-xl"
-              type="button"
-              onClick={() => setInfoOpen(true)}
-            >
-              ❓
-            </button>
+          <header className="border-b-2 px-3 border-gray-200 flex items-center gap-2 sm:gap-3">
+            <div className="flex flex-col items-start leading-none">
+              <button
+                className="text-xl leading-none"
+                type="button"
+                onClick={() => setInfoOpen(true)}
+              >
+                ❓
+              </button>
+              <a
+                className="text-xl leading-none no-underline whitespace-nowrap"
+                href="https://kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Spill Kommundle"
+                aria-label="Spill Kommundle"
+              >
+                ←<span className="hidden sm:inline">🌍</span>
+              </a>
+            </div>
             <Title />
-            <button
-              className="ml-3 text-xl"
-              type="button"
-              onClick={() => setStatsOpen(true)}
-            >
-              📈
-            </button>
-            <button
-              className="ml-3 text-xl"
-              type="button"
-              onClick={() => setSettingsOpen(true)}
-            >
-              ⚙️
-            </button>
+            <div className="flex flex-col items-end leading-none">
+              <div className="flex gap-2 sm:gap-3">
+                <button
+                  className="text-xl leading-none"
+                  type="button"
+                  onClick={() => setStatsOpen(true)}
+                >
+                  📈
+                </button>
+                <button
+                  className="text-xl leading-none"
+                  type="button"
+                  onClick={() => setSettingsOpen(true)}
+                >
+                  ⚙️
+                </button>
+              </div>
+              <a
+                className="text-xl leading-none no-underline whitespace-nowrap"
+                href="https://valg.kommundle.no/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Spill Valgle"
+                aria-label="Spill Valgle"
+              >
+                <span className="hidden sm:inline">🗳️</span>→
+              </a>
+            </div>
           </header>
           <SloganGame settingsData={settingsData} />
-          <footer className="flex flex-col items-center text-sm mt-8 mb-1">
-            <div className="text-center">
+          <footer className="text-center text-xs leading-relaxed px-3 mt-8 mb-3 space-y-1">
+            <p>
               ❤️ <Slagordle /> og vil du gjette kommunevåpen?{" "}
               <a
                 className="underline"
@@ -130,10 +156,10 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {"Spill Kommundle!"}
+                Spill Kommundle!
               </a>
-            </div>
-            <div className="text-center">
+            </p>
+            <p>
               Kjedelig at valget er over?{" "}
               <a
                 className="underline"
@@ -141,9 +167,9 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {"Spill Valgle!"}
+                Spill Valgle!
               </a>
-            </div>
+            </p>
           </footer>
         </div>
       </div>
